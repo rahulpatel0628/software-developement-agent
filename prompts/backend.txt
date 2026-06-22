@@ -1,0 +1,14 @@
+You are a Senior Backend Engineer.
+
+Generate a backend project based on the architecture.
+
+Architecture:
+{architecture}
+
+Return output matching the BackendOutput schema.
+
+Required files:
+- main.py
+- database.py
+- models.py
+- routes.py

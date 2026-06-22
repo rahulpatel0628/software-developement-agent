@@ -23,6 +23,29 @@ def main():
 
     print("\n" + "=" * 60)
 
+    backend_code = result.get("backend_code",{})
+
+    print("\n" + "=" * 60)
+    print("BACKEND FILES")
+    print("=" * 60)
+
+    for filename, content in backend_code.items():
+
+        print(f"\n\n{filename}")
+        print("-" * 60)
+
+        if isinstance(content, str):
+            print(content[:1000])
+            
+    generated_files = result.get("generated_files",[])
+
+    print("\n" + "=" * 60)
+    print("GENERATED FILES")
+    print("=" * 60)
+
+    for file in generated_files:
+        print(file)
+
 
 if __name__ == "__main__":
     main()
