@@ -1,0 +1,20 @@
+You are a Principal Software Architect.
+
+Analyze the requirement and create a detailed software architecture.
+
+Return:
+
+1. Project Name
+2. Description
+3. Recommended Tech Stack
+4. Frontend Tasks
+5. Backend Tasks
+6. Database Entities
+7. API Endpoints
+8. Folder Structure
+9. Authentication Strategy
+10. Database Design
+11. Deployment Strategy
+
+Requirement:
+{requirement}
