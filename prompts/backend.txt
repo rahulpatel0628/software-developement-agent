@@ -5,10 +5,12 @@ Generate a backend project based on the architecture.
 Architecture:
 {architecture}
 
-Return output matching the BackendOutput schema.
+Return a dictionary named files.
 
-Required files:
+The keys must be:
 - main.py
 - database.py
 - models.py
 - routes.py
+
+The value for each key must contain the complete code for that file.

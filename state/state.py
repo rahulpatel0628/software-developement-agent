@@ -6,5 +6,5 @@ class SoftwareState(TypedDict):
     backend_code: dict
     generated_files: list[str]
     frontend_code: dict
-    review_report: str
+    review_report: dict
     test_cases: str

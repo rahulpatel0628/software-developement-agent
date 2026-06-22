@@ -19,3 +19,13 @@ def read_file(file_path: str) -> str:
 
     with open(file_path,"r",encoding="utf-8") as f:
         return f.read()
+
+def read_directory(directory_path: str) -> dict:
+    files = {}
+
+    for file in Path(directory_path).rglob("*.py"):
+
+        with open(file,"r",encoding="utf-8") as f:
+            files[str(file)] = f.read()
+
+    return files

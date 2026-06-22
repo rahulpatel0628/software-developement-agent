@@ -36,7 +36,7 @@ def main():
 
         if isinstance(content, str):
             print(content[:1000])
-            
+
     generated_files = result.get("generated_files",[])
 
     print("\n" + "=" * 60)
@@ -45,6 +45,23 @@ def main():
 
     for file in generated_files:
         print(file)
+
+    review_report = result.get("review_report",{})
+
+    print("\n" + "=" * 60)
+    print("CODE REVIEW")
+    print("=" * 60)
+
+    print(f"\nScore: {review_report.get('score', 'N/A')}/10")
+
+    print("\nIssues:")
+    for issue in review_report.get("issues",[]):
+        print(f"  • {issue}")
+
+    print("\nSuggestions:")
+    for suggestion in review_report.get("suggestions",[]):
+        print(f"  • {suggestion}")
+
 
 
 if __name__ == "__main__":

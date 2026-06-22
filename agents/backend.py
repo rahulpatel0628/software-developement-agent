@@ -3,14 +3,15 @@ from pathlib import Path
 import json
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 from state.state import SoftwareState
 from pydantic import BaseModel
-from typing import Dict
+from typing import  List,Dict
 from tools.file_tool import write_file
 
 #structured output
 class BackendOutput(BaseModel):
-    files: Dict[str, str]
+    files: Dict[str,str]
 
 #load prompt
 PROMPT_PATH = Path("prompts/backend.txt")
@@ -28,7 +29,7 @@ def backend_node(state: SoftwareState) -> dict:
 
         structured_llm = llm.with_structured_output(BackendOutput)
 
-        chain = prompt | structured_llm
+        chain = prompt | structured_llm 
 
         response = chain.invoke({"architecture": architecture})
 
