@@ -24,6 +24,7 @@ def backend_node(state: SoftwareState) -> dict:
     try:
         architecture = state.get("architecture", {})
         review_report = state.get("review_report",{})
+        testing_report = state.get("testing_report",{})
        
         llm = ChatGroq(model="llama-3.3-70b-versatile",temperature=0)
 
@@ -34,7 +35,8 @@ def backend_node(state: SoftwareState) -> dict:
         chain = prompt | structured_llm 
 
         response = chain.invoke({"architecture": architecture,
-                                 "review_report": review_report
+                                 "review_report": review_report,
+                                 "testing_report":testing_report
                                  })
 
         generated_files = []

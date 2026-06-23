@@ -6,6 +6,9 @@ Architecture:
 Previous Review Feedback:
 {review_report}
 
+Testing Feedback:
+{testing_report}
+
 Your task is to generate production-ready backend code.
 
 Requirements:
@@ -19,7 +22,7 @@ Implement database connection.
 Add error handling.
 Add logging where appropriate.
 Follow security best practices.
-Fix all issues mentioned in the review feedback.
+Fix all issues mentioned in the review and testing feedback.
 
 Generate the following files:
 
@@ -29,6 +32,13 @@ models.py
 routes.py
 
 Return output matching the BackendOutput schema.
+Generate improved backend code.
+
+Fix all review issues.
+
+Fix all testing issues.
+
+Improve security, architecture and code quality.
 
 Do not explain the code.
 Do not add markdown.

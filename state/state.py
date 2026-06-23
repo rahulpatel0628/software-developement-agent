@@ -17,3 +17,5 @@ class SoftwareState(TypedDict):
     review_iterations: int
 
     testing_report: dict
+
+    test_iterations: int

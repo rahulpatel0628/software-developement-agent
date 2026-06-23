@@ -19,6 +19,30 @@ def review_router(state: SoftwareState):
 
     return "backend"
 
+def test_router(state: SoftwareState):
+
+    testing_report = state.get("testing_report",{})
+
+    score = testing_report.get("score",0)
+
+    iterations = state.get("test_iterations",0)
+
+    print(f"\nTEST SCORE: {score}")
+
+    print(f"TEST ITERATIONS: {iterations}")
+
+    if score >= 80:
+        print("\nTests Passed")
+        return "end"
+
+    if iterations >= 3:
+        print("\nMax Iterations Reached")
+        return "end"
+
+    print("\nRegenerating Backend")
+
+    return "backend"
+
 def build_graph():
     graph = StateGraph(SoftwareState)
 
@@ -32,7 +56,7 @@ def build_graph():
     graph.add_edge("team_lead","backend")
     graph.add_edge("backend","reviewer")
     graph.add_edge("reviewer","tester")
-    graph.add_conditional_edges("tester",review_router,{"backend": "backend","end": END})
+    graph.add_conditional_edges("tester",test_router,{"backend": "backend","end": END})
     
 
     return graph.compile()

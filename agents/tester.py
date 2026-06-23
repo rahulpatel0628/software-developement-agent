@@ -32,7 +32,9 @@ def tester_node(state: SoftwareState):
 
         response = chain.invoke({"files": files})
 
-        return {"testing_report":response.model_dump()}
+        return {"testing_report":response.model_dump(),
+                "test_iterations":state.get("test_iterations",0) + 1
+                }
 
     except Exception as e:
 
