@@ -29,3 +29,8 @@ def read_directory(directory_path: str) -> dict:
             files[str(file)] = f.read()
 
     return files
+
+def update_file(file_path: str,content: str) -> None:
+
+    with open(file_path,"w",encoding="utf-8") as f:
+        f.write(content)

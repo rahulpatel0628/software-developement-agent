@@ -7,4 +7,5 @@ class SoftwareState(TypedDict):
     generated_files: list[str]
     frontend_code: dict
     review_report: dict
+    review_iterations: int
     test_cases: str

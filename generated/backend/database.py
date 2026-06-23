@@ -1,3 +1,5 @@
-from pymongo import MongoClient
-client = MongoClient('mongodb://localhost:27017/')
-db = client['DeliveryApp']
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://user:password@localhost/db_name'
+db = SQLAlchemy(app)

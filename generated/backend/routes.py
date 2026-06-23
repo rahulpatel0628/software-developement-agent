@@ -1,22 +1,36 @@
-from flask import Blueprint, request, jsonify
-from models import User, Restaurant, Order, Item
-order_routes = Blueprint('order_routes', __name__)
-@order_routes.route('/api/orders', methods=['GET'])
-def get_orders():
-    orders = Order.objects.all()
-    return jsonify([order.to_dict() for order in orders])
-restaurant_routes = Blueprint('restaurant_routes', __name__)
-@restaurant_routes.route('/api/restaurants', methods=['GET'])
-def get_restaurants():
-    restaurants = Restaurant.objects.all()
-    return jsonify([restaurant.to_dict() for restaurant in restaurants])
-item_routes = Blueprint('item_routes', __name__)
-@item_routes.route('/api/items', methods=['GET'])
-def get_items():
-    items = Item.objects.all()
-    return jsonify([item.to_dict() for item in items])
-user_routes = Blueprint('user_routes', __name__)
-@user_routes.route('/api/users', methods=['GET'])
-def get_users():
-    users = User.objects.all()
-    return jsonify([user.to_dict() for user in users])
+from flask import Blueprint, jsonify, request
+from models import Student, Course, Enrollment, Grade
+from database import db
+main_routes = Blueprint('main_routes', __name__)
+@main_routes.route('/students', methods=['GET'])
+def get_students():
+    students = Student.query.all()
+    output = []
+    for student in students:
+        student_data = {'id': student.id, 'name': student.name, 'email': student.email}
+        output.append(student_data)
+    return jsonify({'students': output})
+@main_routes.route('/courses', methods=['GET'])
+def get_courses():
+    courses = Course.query.all()
+    output = []
+    for course in courses:
+        course_data = {'id': course.id, 'name': course.name, 'description': course.description}
+        output.append(course_data)
+    return jsonify({'courses': output})
+@main_routes.route('/enrollments', methods=['GET'])
+def get_enrollments():
+    enrollments = Enrollment.query.all()
+    output = []
+    for enrollment in enrollments:
+        enrollment_data = {'id': enrollment.id, 'student_id': enrollment.student_id, 'course_id': enrollment.course_id}
+        output.append(enrollment_data)
+    return jsonify({'enrollments': output})
+@main_routes.route('/grades', methods=['GET'])
+def get_grades():
+    grades = Grade.query.all()
+    output = []
+    for grade in grades:
+        grade_data = {'id': grade.id, 'enrollment_id': grade.enrollment_id, 'grade': grade.grade}
+        output.append(grade_data)
+    return jsonify({'grades': output})
