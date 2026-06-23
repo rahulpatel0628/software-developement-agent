@@ -11,7 +11,7 @@ from tools.file_tool import write_file
 
 #structured output
 class BackendOutput(BaseModel):
-    files: Dict[str,str]
+    files: Dict[str, str]
 
 #load prompt
 PROMPT_PATH = Path("prompts/backend.txt")
@@ -23,6 +23,8 @@ def load_prompt() -> str:
 def backend_node(state: SoftwareState) -> dict:
     try:
         architecture = state.get("architecture", {})
+        review_report = state.get("review_report",{})
+       
         llm = ChatGroq(model="llama-3.3-70b-versatile",temperature=0)
 
         prompt = ChatPromptTemplate.from_template(load_prompt())
@@ -31,22 +33,26 @@ def backend_node(state: SoftwareState) -> dict:
 
         chain = prompt | structured_llm 
 
-        response = chain.invoke({"architecture": architecture})
+        response = chain.invoke({"architecture": architecture,
+                                 "review_report": review_report
+                                 })
 
         generated_files = []
 
         for filename, content in response.files.items():
 
-            file_path = f"generated/backend/{filename}"
+            file_path = (f"generated/backend/{filename}")
 
             write_file(file_path=file_path,content=content)
-            generated_files.append(file_path )
-            
+
+            generated_files.append(file_path)
+
         return {
-            "backend_code": response.files,
-            "generated_files": generated_files
-            }
-            
+            "backend_code":response.files,
+
+            "generated_files":generated_files
+        }
+
 
     except Exception as e:
         

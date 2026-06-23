@@ -1,26 +1,30 @@
-from database import db
-from flask_sqlalchemy import SQLAlchemy
-class Student(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
-    def __repr__(self):
-        return f"Student('{self.name}', '{self.email}')"
-class Course(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(200), nullable=False)
-    def __repr__(self):
-        return f"Course('{self.name}', '{self.description}')"
-class Enrollment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
-    def __repr__(self):
-        return f"Enrollment('{self.student_id}', '{self.course_id}')"
-class Grade(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    enrollment_id = db.Column(db.Integer, db.ForeignKey('enrollment.id'), nullable=False)
-    grade = db.Column(db.String(10), nullable=False)
-    def __repr__(self):
-        return f"Grade('{self.enrollment_id}', '{self.grade}')"
+from database import Base, session
+from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
+
+class Student(Base):
+    __tablename__ = 'students'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100))
+    email = Column(String(100))
+
+class Course(Base):
+    __tablename__ = 'courses'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100))
+    description = Column(String(200))
+
+class Enrollment(Base):
+    __tablename__ = 'enrollments'
+    id = Column(Integer, primary_key=True)
+    student_id = Column(Integer, ForeignKey('students.id'))
+    course_id = Column(Integer, ForeignKey('courses.id'))
+    student = relationship('Student', backref='enrollments')
+    course = relationship('Course', backref='enrollments')
+
+class Grade(Base):
+    __tablename__ = 'grades'
+    id = Column(Integer, primary_key=True)
+    enrollment_id = Column(Integer, ForeignKey('enrollments.id'))
+    grade = Column(Float)
+    enrollment = relationship('Enrollment', backref='grades')

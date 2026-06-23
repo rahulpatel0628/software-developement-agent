@@ -1,5 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://user:password@localhost/db_name'
-db = SQLAlchemy(app)
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
+engine = create_engine('mysql://user:password@localhost/db')
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+session = Session()
+
+db = SQLAlchemy()

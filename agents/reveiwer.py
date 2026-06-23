@@ -32,12 +32,10 @@ def reviewer_node(state: SoftwareState) -> dict:
         chain = prompt | structured_llm
 
         review = chain.invoke({"files": files})
-        print(type(review))
-        print(review)
-
-        return {
-            "review_report": review.model_dump()
-        }
+        
+        return {"review_report": review.model_dump(),
+                "review_iterations":state.get("review_iterations",0) + 1
+                }
 
     except Exception as e:
 
