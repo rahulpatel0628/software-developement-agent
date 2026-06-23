@@ -76,6 +76,19 @@ def print_review(review_report: dict):
     for suggestion in review_report.get("suggestions",[]):
         print(f"  • {suggestion}")
 
+def print_testing(testing_report: dict):
+    print("\n" + "=" * 60)
+    print("TEST REPORT")
+    print("=" * 60)
+
+    print("Passed:",testing_report.get("passed",False))
+
+    print("Score:",testing_report.get("score",0))
+
+    print("\nIssues:")
+
+    for issue in testing_report.get("issues",[]):
+        print(f"  • {issue}")
 
 def main():
     requirement = input("Enter project requirement:\n> ")
@@ -91,6 +104,8 @@ def main():
 
     review_report = result.get("review_report",{})
 
+    testing_report = result.get("testing_report",{})
+
     print_architecture(architecture)
 
     print_backend_files(backend_code)
@@ -101,5 +116,6 @@ def main():
 
     print("\nReview Iterations:",result.get("review_iterations",0))
 
+    print_testing(testing_report)
 if __name__ == "__main__":
     main()
