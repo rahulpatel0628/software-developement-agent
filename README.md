@@ -199,7 +199,7 @@ software-dev-agent/
 ---
 
 # Installation
-
+```
 Clone repository:
 
 git clone https://github.com/rahulpatel0628/software-developement-agent.git
@@ -223,19 +223,19 @@ source venv/bin/activate
 Install dependencies:
 
 pip install -r requirements.txt
-
+```
 ---
 
 #  Environment Variables
-
+```
 Create a .env file:
 
 GROQ_API_KEY=your_groq_api_key
-
+```
 ---
 
 #  Run Application
-
+```
 Terminal Version:
 
 python main.py
@@ -243,17 +243,17 @@ python main.py
 Streamlit Version:
 
 streamlit run app.py
-
+```
 ---
 
 # Example Input
-
+```
 Build a Student Management System
-
+```
 ---
 
 # Example Output
-
+```
 Architecture Plan
 
 * Tech Stack
@@ -288,11 +288,11 @@ Testing Report
 * Frontend Score
 * Backend Issues
 * Frontend Issues
-
+```
 ---
 
 # Key Features
-
+```
 * Multi-Agent Workflow
 * Architecture Planning
 * Backend Code Generation
@@ -303,11 +303,11 @@ Testing Report
 * LangGraph State Management
 * Streamlit Interface
 * Production-Ready Agent Pipeline
-
+```
 ---
 
 # Future Improvements
-
+```
 * User Approval Workflow
 * Code Regeneration
 * RAG-Based Project Memory
@@ -320,13 +320,13 @@ Testing Report
 * Database Agent
 * Multi-Language Support
 * OpenAI / Claude / GLM Support
-
+```
 ---
 
 # Learning Outcomes
 
 This project demonstrates:
-
+```
 * Agentic AI Systems
 * LangGraph Workflows
 * Multi-Agent Architecture
@@ -335,7 +335,7 @@ This project demonstrates:
 * State Management
 * Software Engineering Automation
 * LLM-Based Code Generation
-
+```
 ---
 
 # Author
