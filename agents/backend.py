@@ -52,7 +52,7 @@ def backend_node(state: SoftwareState) -> dict:
         return {
             "backend_code":response.files,
 
-            "generated_files":generated_files
+            "generated_files_backend":generated_files
         }
 
 

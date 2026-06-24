@@ -42,18 +42,51 @@ def print_backend_files(backend_code: dict):
 
         if len(content) > 1000:
             print("\n...truncated...")
+
+def print_frontend_files(frontend_code: dict):
+
+    print("\n" + "=" * 60)
+    print("FRONTEND FILES")
+    print("=" * 60)
+
+    if "error" in frontend_code:
+
+        print("\nerror")
+        print("-" * 60)
+        print(frontend_code["error"])
+
+        return
+
+    for filename, content in frontend_code.items():
+
+        print(f"\n{filename}")
+        print("-" * 60)
+
+        print(content[:1000])
+
+        if len(content) > 1000:
+            print("\n...truncated...")
     
 
-def print_generated_files(generated_files: list):
+def print_generated_files_backend(generated_files_backend: list):
 
 
     print("\n" + "=" * 60)
     print("GENERATED FILES")
     print("=" * 60)
 
-    for file in generated_files:
+    for file in generated_files_backend:
         print(file)
 
+def print_generated_files_frontend(generated_files_frontend: list):
+
+
+    print("\n" + "=" * 60)
+    print("GENERATED FILES")
+    print("=" * 60)
+
+    for file in generated_files_frontend:
+        print(file)
 
 def print_review(review_report: dict):
     print("\n" + "=" * 60)
@@ -81,13 +114,18 @@ def print_testing(testing_report: dict):
     print("TEST REPORT")
     print("=" * 60)
 
-    print("Passed:",testing_report.get("passed",False))
+    print("Frontend Score:",testing_report.get("frontend_score",0))
 
-    print("Score:",testing_report.get("score",0))
+    print("\nFrontend Issues:")
 
-    print("\nIssues:")
+    for issue in testing_report.get("frontend_issues",[]):
+        print(f"  • {issue}")
+        
+    print("Backend Score:",testing_report.get("backend_score",0))
 
-    for issue in testing_report.get("issues",[]):
+    print("\nBackend Issues:")
+
+    for issue in testing_report.get("backend_issues",[]):
         print(f"  • {issue}")
 
 def main():
@@ -100,7 +138,11 @@ def main():
 
     backend_code = result.get("backend_code",{})
 
-    generated_files = result.get("generated_files",[])
+    frontend_code = result.get("frontend_code",{})
+
+    generated_files_backend = result.get("generated_files_backend",[])
+    
+    generated_files_frontend = result.get("generated_files_frontend",[])
 
     review_report = result.get("review_report",{})
 
@@ -110,12 +152,17 @@ def main():
 
     print_backend_files(backend_code)
 
-    print_generated_files(generated_files)
+    print_generated_files_backend(generated_files_backend)
+
+    print_frontend_files(frontend_code)
+
+    print_generated_files_frontend(generated_files_frontend)
 
     print_review(review_report)
 
     print("\nReview Iterations:",result.get("review_iterations",0))
 
     print_testing(testing_report)
+    
 if __name__ == "__main__":
     main()

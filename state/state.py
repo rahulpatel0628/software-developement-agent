@@ -6,11 +6,13 @@ class SoftwareState(TypedDict):
 
     architecture: dict
 
-    backend_plan: dict
-
     backend_code: dict
 
-    generated_files: list[str]
+    frontend_code: dict
+    
+    generated_files_backend: list[str]
+
+    generated_files_frontend: list[str]
 
     review_report: dict
 

@@ -5,43 +5,31 @@ from agents.backend import backend_node
 from agents.reveiwer import reviewer_node
 from agents.backend_planner import backend_planner_node
 from agents.tester import tester_node
-
-def review_router(state: SoftwareState):
-    score = state.get("review_report",{}).get("score",0)
-
-    iterations = state.get("review_iterations",0)
-
-    if score >= 8:
-        return "end"
-
-    if iterations >= 3:
-        return "end"
-
-    return "backend"
+from agents.frontend import frontend_node
 
 def test_router(state: SoftwareState):
 
-    testing_report = state.get("testing_report",{})
-
-    score = testing_report.get("score",0)
+    report = state["testing_report"]
 
     iterations = state.get("test_iterations",0)
 
-    print(f"\nTEST SCORE: {score}")
+    backend_score = report.get("backend_score",0)
 
-    print(f"TEST ITERATIONS: {iterations}")
+    frontend_score = report.get("frontend_score",0)
 
-    if score >= 80:
-        print("\nTests Passed")
+    if iterations > 3:
         return "end"
 
-    if iterations >= 3:
-        print("\nMax Iterations Reached")
-        return "end"
+    if backend_score < 5:
+        return "backend"
 
-    print("\nRegenerating Backend")
+    elif frontend_score < 4:
+        return "frontend"
 
-    return "backend"
+    return "end"
+
+def merge(state: SoftwareState):
+    return {}
 
 def build_graph():
     graph = StateGraph(SoftwareState)
@@ -50,13 +38,24 @@ def build_graph():
     graph.add_node("backend",backend_node)
     graph.add_node("reviewer",reviewer_node)
     graph.add_node("tester",tester_node)
-   
+    graph.add_node("frontend",frontend_node)
+    graph.add_node("merge",merge)
 
     graph.add_edge(START,"team_lead")
     graph.add_edge("team_lead","backend")
-    graph.add_edge("backend","reviewer")
+    graph.add_edge("team_lead","frontend")
+
+    graph.add_edge("backend","merge")
+    graph.add_edge("frontend","merge")
+
+    graph.add_edge("merge","reviewer")
+
     graph.add_edge("reviewer","tester")
-    graph.add_conditional_edges("tester",test_router,{"backend": "backend","end": END})
+    graph.add_conditional_edges("tester",test_router,{"backend": "backend",
+                                                      "frontend": "frontend",
+                                                      "end": END
+                                                      }
+                                )
     
 
     return graph.compile()

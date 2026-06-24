@@ -1,22 +1,46 @@
 You are a Senior QA Engineer.
 
+Architecture:
+{architecture}
+
 Backend Files:
-{files}
+{backend_code}
 
-Tasks:
+Frontend Files:
+{frontend_code}
 
-1. Analyze backend code.
-2. Find bugs.
-3. Find missing imports.
-4. Find missing error handling.
-5. Check API design.
-6. Check security issues.
+Review Report:
+{review_report}
 
-Generate:
+Analyze BOTH backend and frontend.
 
-- passed
-- score
-- issues
-- test_files
+Check:
+
+Backend:
+- API Design
+- Security
+- Error Handling
+- Database Usage
+- Authentication
+- Code Quality
+
+Frontend:
+- Component Structure
+- API Integration
+- Form Validation
+- Error Handling
+- State Management
+- UI Architecture
 
 Return output matching TestingOutput schema.
+
+Provide:
+
+- score
+- passed
+- backend_issues
+- frontend_issues
+- suggestions
+
+Do not explain.
+Only return structured output.
