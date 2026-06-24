@@ -3,7 +3,6 @@ from state.state import SoftwareState
 from agents.team_lead import team_lead_node
 from agents.backend import backend_node
 from agents.reveiwer import reviewer_node
-from agents.backend_planner import backend_planner_node
 from agents.tester import tester_node
 from agents.frontend import frontend_node
 
