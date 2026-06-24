@@ -22,7 +22,7 @@ The user provides a project requirement, and the system:
 ---
 
 # System Architecture
-
+```
 User Requirement
 ↓
 Team Lead Agent
@@ -38,7 +38,7 @@ Reviewer
 Tester
 ↓
 Final Output
-
+```
 ---
 
 # Agents
@@ -163,9 +163,8 @@ Output:
 ---
 
 # 📂 Project Structure
-
+```
 software-dev-agent/
-
 ├── agents/
 │   ├── team_lead.py
 │   ├── backend.py
@@ -196,7 +195,7 @@ software-dev-agent/
 ├── app.py
 ├── main.py
 └── requirements.txt
-
+```
 ---
 
 # Installation
